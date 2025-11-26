@@ -1,0 +1,27 @@
+<canvas id="graphic-pizza"></canvas>
+
+<script>
+  const ctxPizza = document.getElementById('graphic-pizza');
+  let necessidade = JSON.parse('{{ statistics.types.Necessidade|round(2)}}');
+  let desejos = JSON.parse('{{ statistics.types.Desejos|round(2)}}');
+  let poupanca = JSON.parse('{{ statistics.types.Poupança|round(2)}}');
+
+  new Chart(ctxPizza, {
+    type: 'doughnut',
+    data: {
+      labels: ['Necessidade', 'Desejos', 'Poupança'],
+      datasets: [{
+        label: '%',
+        data: [necessidade, desejos, poupanca],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>

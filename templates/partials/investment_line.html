@@ -1,0 +1,25 @@
+<canvas id="graphic-line"></canvas>
+
+<script>
+  const ctxLine = document.getElementById('graphic-line');
+  let investiments = JSON.parse('{{ statistics.lineGraphic }}');
+
+  new Chart(ctxLine, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+      datasets: [{
+        label: 'R$',
+        data: investiments,
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
