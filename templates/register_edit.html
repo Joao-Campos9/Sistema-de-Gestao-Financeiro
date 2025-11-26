@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home.home_main')}}">Editar Registro</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ url_for('register.register_home', month=registry.date[5:7], year=registry.date[0:4]) }}">Registros</a>
+                    </li>
+            </div>
+        </div>
+    </nav>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm rounded">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Editar Registro</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/register/update/{{ registry.id }}" method="POST">
+                            <div class="mb-3">
+                                <label class="form-label">Descrição</label>
+                                <input 
+                                    type="text"
+                                    class="form-control"
+                                    name="description"
+                                    value="{{ registry.description }}"
+                                    required
+                                >
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Valor</label>
+                                <input 
+                                    type="number"
+                                    step="0.01"
+                                    class="form-control"
+                                    name="value"
+                                    value="{{ registry.value }}"
+                                    required
+                                >
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Categoria</label>
+                                <select class="form-select" name="category" required>
+                                    <option value="Alimentação" {% if registry.category == "Alimentação" %}selected{% endif %}>Alimentação</option>
+                                    <option value="Assinaturas" {% if registry.category == "Assinaturas" %}selected{% endif %}>Assinaturas</option>
+                                    <option value="Contas" {% if registry.category == "Contas" %}selected{% endif %}>Contas</option>
+                                    <option value="Investimentos" {% if registry.category == "Investimentos" %}selected{% endif %}>Investimentos</option>
+                                    <option value="Lazer" {% if registry.category == "Lazer" %}selected{% endif %}>Lazer</option>
+                                    <option value="Mercado" {% if registry.category == "Mercado" %}selected{% endif %}>Mercado</option>
+                                    <option value="Necessidades" {% if registry.category == "Necessidades" %}selected{% endif %}>Necessidades</option>
+                                    <option value="Renda Extra" {% if registry.category == "Renda Extra" %}selected{% endif %}>Renda Extra</option>
+                                    <option value="Roupas" {% if registry.category == "Roupas" %}selected{% endif %}>Roupas</option>
+                                    <option value="Saúde" {% if registry.category == "Saúde" %}selected{% endif %}>Saúde</option>
+                                    <option value="Transporte" {% if registry.category == "Transporte" %}selected{% endif %}>Transporte</option>
+                                    <option value="Trabalho" {% if registry.category == "Trabalho" %}selected{% endif %}>Trabalho</option>
+                                    <option value="Outros" {% if registry.category == "Outros" %}selected{% endif %}>Outros</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tipo</label>
+                                <select class="form-select" name="type" required>
+                                    <option value="Renda"{% if registry.type == "Renda" %}selected{% endif %}>Renda</option>
+                                    <option value="Necessidade"{% if registry.type == "Necessidade" %}selected{% endif %}>Necessidade</option>
+                                    <option value="Desejos"{% if registry.type == "Desejos" %}selected{% endif %}>Desejos</option>
+                                    <option value="Poupança"{% if registry.type == "Poupança" %}selected{% endif %}>Poupança</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Data</label>
+                                <input type="date" name="date" class="form-control" value="{{ registry.date }}" required>
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <a href="{{ url_for('register.register_home', month=registry.date[5:7], year=registry.date[0:4]) }}" class="btn btn-outline-secondary">Cancelar</a>
+                                <button class="btn btn-success" type="submit">Salvar Alterações</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
